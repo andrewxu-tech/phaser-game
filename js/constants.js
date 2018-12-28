@@ -17,3 +17,5 @@ const spriteLists = { // eslint-disable-line
     '1'
   ]
 };
+
+const dropLineHeight = 1000; // eslint-disable-line

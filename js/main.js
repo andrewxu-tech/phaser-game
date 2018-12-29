@@ -21,10 +21,46 @@ Main.prototype = {
       }
     );
 
-    this['claw-left'].body.angle += 1;
-    this['claw-left'].angle += 1;
-    this['claw-right'].body.angle += -1;
-    this['claw-right'].angle += -1;
+    const clawComponents = ['claw-left', 'claw-right'];
+
+    const leftKey = this.input.keyboard.addKey(Phaser.Keyboard.LEFT); // eslint-disable-line
+    const rightKey = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT); // eslint-disable-line
+    const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP); // eslint-disable-line
+    const downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN); // eslint-disable-line
+    const spaceBarKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); // eslint-disable-line
+
+    if (spaceBarKey.isDown && !(this['claw-left'].body.angle >= 46)) {
+      this['claw-left'].body.angle += 2;
+      this['claw-left'].angle += 2;
+      this['claw-right'].body.angle += -2;
+      this['claw-right'].angle += -2;
+    } else if (this['claw-left'].body.angle <= 0) {
+      this['claw-left'].body.angle = 0;
+      this['claw-left'].angle = 0;
+      this['claw-right'].body.angle = 0;
+      this['claw-right'].angle = 0;
+    } else {
+      this['claw-left'].body.angle += -2;
+      this['claw-left'].angle += -2;
+      this['claw-right'].body.angle += 2;
+      this['claw-right'].angle += 2;
+    }
+
+    if (leftKey.isDown) {
+      clawComponents.forEach(c => this[c].body.velocity.x = -1000);
+    } else if (rightKey.isDown) {
+      clawComponents.forEach(c => this[c].body.velocity.x = 1000);
+    } else if (rightKey.isDown) {
+      clawComponents.forEach(c => this[c].body.velocity.y = 1000);
+    } else if (rightKey.isDown) {
+      clawComponents.forEach(c => this[c].body.velocity.y = 1000);
+    }
+    if (!leftKey.isDown && !rightKey.isDown && !upKey.isDown && !downKey.isDown) {
+      clawComponents.forEach((c) => {
+        this[c].body.velocity.x = 0;
+        this[c].body.velocity.y = 0;
+      });
+    }
   },
   createUI: function() {
     const leftMenu = this.game.add.bitmapData(
@@ -47,28 +83,16 @@ Main.prototype = {
     dropLine.ctx.fill();
     this.dropLine = this.game.add.sprite(0, 0, dropLine);
 
-    const clawComponents = [
-      {
-        name: 'claw-right',
-        xPosition: 2000,
-        yPosition: 150
-      }, {
-        name: 'claw-left',
-        xPosition: 2000,
-        yPosition: 150
-      }];
+    ['claw-right', 'claw-left'].forEach((name) => {
+      this[name] = this.game.add.sprite(2000, 150, name);
+      this[name].anchor.x = 0.5;
+      this[name].anchor.y = 0.5;
 
-    clawComponents.forEach((component) => {
-      this[component.name] = this.game.add.sprite(
-        component.xPosition,
-        component.yPosition,
-        component.name
-      );
-      this.game.physics.p2.enable(this[component.name], false);
-      this[component.name].body.clearShapes();
-      this[component.name].body.static = true;
-      this[component.name].body.fixedRotation = true;
-      this[component.name].body.loadPolygon('claw_physics', component.name);
+      this.game.physics.p2.enable(this[name], false);
+      this[name].body.clearShapes();
+      this[name].body.static = true;
+      this[name].body.fixedRotation = true;
+      this[name].body.loadPolygon('claw_physics', name);
     });
   },
   createSprites: function(game) {

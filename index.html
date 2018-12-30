@@ -13,7 +13,7 @@
     <style type="text/css">
         body {
           margin: 0;
-          background-color: #444444;
+          background-color: #555555;
         }
 
         canvas {
@@ -28,7 +28,7 @@
 
 				game = new Phaser.Game(
           gameWidth,
-          2000,
+          2500,
           Phaser.AUTO
         );
 
@@ -40,7 +40,7 @@
 				game.state.add("GameOver", GameOver);
 
 				//Start the first state
-        game.state.currentTheme = 'burger';
+        game.state.currentTheme = 'building';
 				game.state.start("Boot");
 
 		})();

@@ -25,6 +25,12 @@ const spriteLists = { // eslint-disable-line
     'right-pillar-1',
     'right-pillar-2',
     'right-pillar-3'
+  ],
+  column: [
+    'angel',
+    '3',
+    '1',
+    '2'
   ]
 };
 

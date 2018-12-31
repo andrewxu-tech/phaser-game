@@ -1,22 +1,25 @@
+/* global game spriteLists Phaser dropLineHeight */
 var Main = function(game) {
 
 };
 
 Main.prototype = {
   create: function(game) {
-    this.game.stage.backgroundColor = '#DDDDDD';
-    this.game.physics.startSystem(Phaser.Physics.P2JS); // eslint-disable-line
-    this.game.physics.p2.gravity.y = 5000;
-    this.game.physics.p2.setBoundsToWorld(true, false, false, true);
+    game.stage.backgroundColor = '#DDDDDD';
+    game.physics.startSystem(Phaser.Physics.P2JS);
+    game.physics.p2.gravity.y = 2500;
+    game.physics.p2.setBoundsToWorld(true, false, false, true);
+    game.physics.p2.restitution = 0;
+    game.physics.p2.relaxation = 0;
     this.createUI(game);
     this.createSprites(game);
   },
   update: function() {
     const clawComponents = ['claw-left', 'claw-right'];
 
-    const leftKey = this.input.keyboard.addKey(Phaser.Keyboard.LEFT); // eslint-disable-line
-    const rightKey = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT); // eslint-disable-line
-    const spaceBarKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); // eslint-disable-line
+    const leftKey = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    const rightKey = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    const spaceBarKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     if (spaceBarKey.isDown && !(this['claw-left'].body.angle >= 25)) {
       this['claw-left'].body.angle += 2;
@@ -29,10 +32,10 @@ Main.prototype = {
       this['claw-right'].body.angle = 0;
       this['claw-right'].angle = 0;
     } else {
-      this['claw-left'].body.angle += -1;
-      this['claw-left'].angle += -1;
-      this['claw-right'].body.angle += 1;
-      this['claw-right'].angle += 1;
+      this['claw-left'].body.angle += -0.5;
+      this['claw-left'].angle += -0.5;
+      this['claw-right'].body.angle += 0.5;
+      this['claw-right'].angle += 0.5;
     }
 
     if (leftKey.isDown) {
@@ -47,6 +50,22 @@ Main.prototype = {
         this[c].body.velocity.y = 0;
       });
     }
+
+    // Destroy sprite in menu
+    if (this[game.state.currentSprite].position.y > dropLineHeight
+      && game.state.currentMenuState.includes(game.state.currentSprite)
+    ) {
+      this[`menu-${game.state.currentSprite}`].destroy();
+      game.state.currentMenuState.splice(0, 1);
+    }
+
+    spriteLists[game.state.currentTheme].forEach((sprite) => {
+      if (this[sprite]
+        && (this[sprite].position.y + (this[sprite].height / 2)) < dropLineHeight
+        && this[sprite].previousPosition.y === this[sprite].position.y) {
+        console.log('WINNNNN');
+      }
+    });
   },
   createUI: function() {
     const worldUi = this.game.add.bitmapData(
@@ -56,8 +75,8 @@ Main.prototype = {
     // Making the drop line
     worldUi.ctx.beginPath();
     worldUi.ctx.setLineDash([40, 30]);
-    worldUi.ctx.moveTo(0, dropLineHeight); // eslint-disable-line
-    worldUi.ctx.lineTo(this.game.world.width, dropLineHeight); // eslint-disable-line
+    worldUi.ctx.moveTo(0, dropLineHeight);
+    worldUi.ctx.lineTo(this.game.world.width, dropLineHeight);
     worldUi.ctx.lineWidth = 15;
     worldUi.ctx.strokeStyle = '#800000';
     worldUi.ctx.stroke();
@@ -65,8 +84,8 @@ Main.prototype = {
     // Making the rope line
     worldUi.ctx.beginPath();
     worldUi.ctx.setLineDash([1, 0]);
-    worldUi.ctx.moveTo(0, 130); // eslint-disable-line
-    worldUi.ctx.lineTo(this.game.world.width, 130); // eslint-disable-line
+    worldUi.ctx.moveTo(0, 130);
+    worldUi.ctx.lineTo(this.game.world.width, 130);
     worldUi.ctx.lineWidth = 30;
     worldUi.ctx.strokeStyle = '#555555';
     worldUi.ctx.stroke();
@@ -74,7 +93,7 @@ Main.prototype = {
     // Make the left menu rectangle
     worldUi.ctx.beginPath();
     worldUi.ctx.rect(
-      0, 0, 735, this.game.world.height); // eslint-disable-line
+      0, 0, 735, this.game.world.height);
     worldUi.ctx.fillStyle = '#BBBBBB';
     worldUi.ctx.fill();
 
@@ -100,7 +119,7 @@ Main.prototype = {
     });
   },
   createSprites: function(game) {
-    game.state.currentSprite = spriteLists[game.state.currentTheme][0]; // eslint-disable-line
+    game.state.currentSprite = spriteLists[game.state.currentTheme][0];
 
     const placeSpriteInClaw = (spriteName) => {
       this[spriteName] = this.game.add.sprite(
@@ -113,7 +132,9 @@ Main.prototype = {
 
       this.game.physics.p2.enable([this[spriteName]], false);
       this[spriteName].body.clearShapes();
-      this[spriteName].body.loadPolygon('building_physics', spriteName);
+      this[spriteName].body.restitution = 0;
+      this[spriteName].body.damping = 0.9;
+      this[spriteName].body.loadPolygon('column_physics', spriteName);
     };
 
     const placeSpriteInMenu = (spriteName, positionInMenu) => {
@@ -126,9 +147,7 @@ Main.prototype = {
       this[`menu-${spriteName}`].anchor.y = 0.5;
     };
 
-    const currentMenuState = [...spriteLists[game.state.currentTheme]]; // eslint-disable-line
-
-    spriteLists[game.state.currentTheme].forEach( // eslint-disable-line
+    spriteLists[game.state.currentTheme].forEach(
       (sprite, i) => {
         placeSpriteInMenu(sprite, i);
 
@@ -140,14 +159,19 @@ Main.prototype = {
     );
 
     // Menu scrolling
-    const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP); // eslint-disable-line
-    const downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN); // eslint-disable-line
+    const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP);
+    const downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+
+    game.state.currentMenuState = [...spriteLists[game.state.currentTheme]];
 
     const updateMenu = () => {
-      this[game.state.currentSprite].destroy();
-      game.state.currentSprite = currentMenuState[0];
+      if (this[game.state.currentSprite].position.y < 1200) {
+        this[game.state.currentSprite].destroy();
+      }
 
-      currentMenuState.forEach(
+      game.state.currentSprite = game.state.currentMenuState[0];
+
+      game.state.currentMenuState.forEach(
         (sprite, i) => {
           this[`menu-${sprite}`].destroy();
           placeSpriteInMenu(sprite, i);
@@ -160,15 +184,21 @@ Main.prototype = {
     };
 
     upKey.onDown.add(() => {
-      currentMenuState.push(currentMenuState[0]);
-      currentMenuState.splice(0, 1);
-      updateMenu();
+      if (game.state.currentMenuState.length) {
+        game.state.currentMenuState.push(game.state.currentMenuState[0]);
+        game.state.currentMenuState.splice(0, 1);
+        updateMenu();
+      }
     });
 
-    downKey.onDown.add(() => {
-      currentMenuState.push(currentMenuState[currentMenuState.length], 0);
-      currentMenuState.splice(currentMenuState.length, 1);
-      updateMenu();
+    game.state.currentMenuState.length && downKey.onDown.add(() => {
+      if (game.state.currentMenuState.length) {
+        game.state.currentMenuState.unshift(
+          game.state.currentMenuState[game.state.currentMenuState.length - 1]
+        );
+        game.state.currentMenuState.pop();
+        updateMenu();
+      }
     });
   }
 };

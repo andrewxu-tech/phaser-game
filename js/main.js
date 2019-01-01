@@ -31,28 +31,42 @@ Main.prototype = {
       this['claw-left'].angle = 0;
       this['claw-right'].body.angle = 0;
       this['claw-right'].angle = 0;
-    } else {
+    } else if (!spaceBarKey.isDown) {
       this['claw-left'].body.angle += -0.5;
       this['claw-left'].angle += -0.5;
       this['claw-right'].body.angle += 0.5;
       this['claw-right'].angle += 0.5;
     }
 
-    if (leftKey.isDown) {
+    if (leftKey.isDown
+    && this['claw-left'].body.velocity.x === 0) {
+      console.log('moving left');
       clawComponents.forEach(c => this[c].body.velocity.x = -1000);
-    } else if (rightKey.isDown) {
+    } else if (rightKey.isDown
+    && this['claw-right'].body.velocity.x === 0) {
+      console.log('moving right');
       clawComponents.forEach(c => this[c].body.velocity.x = 1000);
+      console.log('LOGGING AFTER FOREACH', this['claw-right'].body.velocity.x);
+    }
+
+    if ((this['claw-left'].position.x <=
+      735 + this['claw-left'].width / 2
+      && this['claw-left'].body.velocity.x < 0)
+      || (this['claw-right'].position.x >=
+      this.game.world.width - this['claw-right'].width / 2
+      && this['claw-left'].body.velocity.x > 0)
+    ) {
+      clawComponents.forEach(c => this[c].body.velocity.x = 0);
     }
 
     if (!leftKey.isDown && !rightKey.isDown) {
       clawComponents.forEach((c) => {
         this[c].body.velocity.x = 0;
-        this[c].body.velocity.y = 0;
       });
     }
 
     // Destroy sprite in menu
-    if (this[game.state.currentSprite].position.y > dropLineHeight
+    if (this[game.state.currentSprite].position.y > dropLineHeight - 500
       && game.state.currentMenuState.includes(game.state.currentSprite)
     ) {
       this[`menu-${game.state.currentSprite}`].destroy();
@@ -126,7 +140,7 @@ Main.prototype = {
     });
   },
   createSprites: function(game) {
-    // Initial states at beginning of level
+    // Initial states at beginning of lev
     game.state.currentMenuState = [...spriteLists[game.state.currentTheme]];
     game.state.currentSprite = spriteLists[game.state.currentTheme][0];
 
@@ -172,8 +186,9 @@ Main.prototype = {
     const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP);
     const downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 
+    // Updating the menu on pressing the up or down keys
     const updateMenu = () => {
-      if (this[game.state.currentSprite].position.y < 1200) {
+      if (this[game.state.currentSprite].position.y < dropLineHeight - 500) {
         this[game.state.currentSprite].destroy();
       }
 
@@ -230,7 +245,6 @@ Main.prototype = {
 
     // Pressing R to reset
     rKey.onDown.add(() => {
-      console.log('pressing R to reset');
       // Destroy the currently active physics-enabled sprites
       spriteLists[game.state.currentTheme].forEach((sprite) => {
         this[sprite] ? this[sprite].destroy() : null;

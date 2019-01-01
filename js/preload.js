@@ -11,6 +11,7 @@ Preload.prototype = {
     this.game.load.physics('claw_physics', 'assets/ui/claw_physics.json');
     this.game.load.physics('building_physics', 'assets/themes/building/building_physics.json');
     this.game.load.physics('column_physics', 'assets/themes/column/column_physics.json');
+    this.game.load.physics('temple_physics', 'assets/themes/temple/temple_physics.json');
   },
   create: function() {
     this.game.state.start('Main');

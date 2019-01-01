@@ -59,11 +59,18 @@ Main.prototype = {
       game.state.currentMenuState.splice(0, 1);
     }
 
+    // Win condition
     spriteLists[game.state.currentTheme].forEach((sprite) => {
-      if (this[sprite]
-        && (this[sprite].position.y + (this[sprite].height / 2)) < dropLineHeight
-        && this[sprite].previousPosition.y === this[sprite].position.y) {
-        console.log('WINNNNN');
+      if (this[sprite]) {
+        const topOfSprite = this[sprite].position.y - this[sprite].height / 2;
+        if (topOfSprite > dropLineHeight - 300 && topOfSprite < dropLineHeight
+          && Math.floor(
+            this[sprite].previousPosition.y
+          ) === Math.floor(
+            this[sprite].position.y
+          )) {
+          console.log('WIN CONDITION MET');
+        }
       }
     });
   },
@@ -119,6 +126,8 @@ Main.prototype = {
     });
   },
   createSprites: function(game) {
+    // Initial states at beginning of level
+    game.state.currentMenuState = [...spriteLists[game.state.currentTheme]];
     game.state.currentSprite = spriteLists[game.state.currentTheme][0];
 
     const placeSpriteInClaw = (spriteName) => {
@@ -134,7 +143,7 @@ Main.prototype = {
       this[spriteName].body.clearShapes();
       this[spriteName].body.restitution = 0;
       this[spriteName].body.damping = 0.9;
-      this[spriteName].body.loadPolygon('column_physics', spriteName);
+      this[spriteName].body.loadPolygon('temple_physics', spriteName);
     };
 
     const placeSpriteInMenu = (spriteName, positionInMenu) => {
@@ -147,6 +156,7 @@ Main.prototype = {
       this[`menu-${spriteName}`].anchor.y = 0.5;
     };
 
+    // Place the sprite in the menu and in the claw
     spriteLists[game.state.currentTheme].forEach(
       (sprite, i) => {
         placeSpriteInMenu(sprite, i);
@@ -161,8 +171,6 @@ Main.prototype = {
     // Menu scrolling
     const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP);
     const downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-
-    game.state.currentMenuState = [...spriteLists[game.state.currentTheme]];
 
     const updateMenu = () => {
       if (this[game.state.currentSprite].position.y < 1200) {
@@ -183,7 +191,24 @@ Main.prototype = {
       );
     };
 
-    upKey.onDown.add(() => {
+    // Reset the menu when the user presses R
+    const resetMenu = () => {
+      game.state.currentMenuState = [...spriteLists[game.state.currentTheme]];
+      game.state.currentSprite = game.state.currentMenuState[0];
+
+      game.state.currentMenuState.forEach((sprite, i) => {
+        if (this[`menu-${sprite}`]) {
+          this[`menu-${sprite}`].destroy();
+        }
+        placeSpriteInMenu(sprite, i);
+
+        if (game.state.currentSprite === sprite) {
+          placeSpriteInClaw(sprite);
+        }
+      });
+    };
+
+    game.state.currentMenuState.length && upKey.onDown.add(() => {
       if (game.state.currentMenuState.length) {
         game.state.currentMenuState.push(game.state.currentMenuState[0]);
         game.state.currentMenuState.splice(0, 1);
@@ -199,6 +224,20 @@ Main.prototype = {
         game.state.currentMenuState.pop();
         updateMenu();
       }
+    });
+
+    const rKey = this.input.keyboard.addKey(Phaser.Keyboard.R);
+
+    // Pressing R to reset
+    rKey.onDown.add(() => {
+      console.log('pressing R to reset');
+      // Destroy the currently active physics-enabled sprites
+      spriteLists[game.state.currentTheme].forEach((sprite) => {
+        this[sprite] ? this[sprite].destroy() : null;
+      });
+
+      // Restore the current menu state
+      resetMenu();
     });
   }
 };

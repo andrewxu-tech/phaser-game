@@ -8,6 +8,8 @@ Preload.prototype = {
     });
     this.game.load.image('claw-left', 'assets/ui/claw-left.png');
     this.game.load.image('claw-right', 'assets/ui/claw-right.png');
+    this.game.load.image('claw-screw', 'assets/ui/claw-screw.png');
+    this.game.load.image('screw', 'assets/ui/screw.png');
     this.game.load.physics('sprite_physics2', 'assets/sprite_physics2.json');
     this.game.load.physics('claw_physics', 'assets/ui/claw_physics.json');
     this.game.load.physics('building_physics', 'assets/themes/building/building_physics.json');

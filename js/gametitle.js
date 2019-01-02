@@ -5,6 +5,23 @@ GameTitle.prototype = {
   preload: function() {
   },
   create: function() {
+    const gameTitleUi = this.game.add.bitmapData(
+      this.game.world.width, this.game.world.height
+    );
+
+    // Create the background rectangle for the title
+    gameTitleUi.ctx.beginPath();
+    gameTitleUi.ctx.rect(
+      this.game.world.width / 2 - 1000,
+      this.game.world.height / 2 - 1000,
+      2000,
+      2000
+    );
+    gameTitleUi.ctx.fillStyle = '#333333';
+    gameTitleUi.ctx.fill();
+
+    this.gameTitleUi = this.game.add.sprite(0, 0, gameTitleUi);
+
     game.stage.backgroundColor = colors.darkBackground;
     const titleText = game.add.text(
       game.world.centerX,

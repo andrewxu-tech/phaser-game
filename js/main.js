@@ -15,7 +15,7 @@ Main.prototype = {
     this.createSprites(game);
   },
   update: function() {
-    const clawComponents = ['claw-left', 'claw-right'];
+    const clawComponents = ['claw-left', 'claw-right', 'claw-screw'];
 
     const leftKey = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     const rightKey = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -135,6 +135,16 @@ Main.prototype = {
       this[name].body.fixedRotation = true;
       this[name].body.loadPolygon('claw_physics', name);
     });
+
+    this['claw-screw'] = this.game.add.sprite(2000, 150, 'claw-screw');
+    this['claw-screw'].anchor.x = 0.5;
+    this['claw-screw'].anchor.y = 0.5;
+
+    this.game.physics.p2.enable(this['claw-screw'], false);
+    this['claw-screw'].body.clearShapes();
+    this['claw-screw'].body.static = true;
+    this['claw-screw'].body.fixedRotation = true;
+    this['claw-screw'].body.loadPolygon('claw_physics', 'claw-screw');
   },
   createSprites: function(game) {
     // Initial states at beginning of lev

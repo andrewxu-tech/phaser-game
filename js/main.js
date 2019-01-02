@@ -164,7 +164,10 @@ Main.prototype = {
       this[spriteName].body.clearShapes();
       this[spriteName].body.restitution = 0;
       this[spriteName].body.damping = 0.9;
-      this[spriteName].body.loadPolygon('temple_physics', spriteName);
+      this[spriteName].body.loadPolygon(
+        `${game.state.currentTheme}_physics`,
+        spriteName
+      );
     };
 
     const placeSpriteInMenu = (spriteName, positionInMenu) => {

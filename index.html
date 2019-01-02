@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>STACK.</title>
+  <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   <script type="text/javascript" src="js/phaser.min.js"></script>
   <script type="text/javascript" src="js/constants.js"></script>
@@ -24,7 +25,7 @@
   <script type="text/javascript">
     (function() {
       gameWidth = window.innerWidth * window.devicePixelRatio < 3000
-        ? 3000
+      ? 3000
         : window.innerWidth * window.devicePixelRatio;
 
       Phaser.ScaleManager.SHOW_ALL = 1;
@@ -42,7 +43,7 @@
       game.state.add("GameOver", GameOver);
 
       //Start the first state
-      game.state.currentTheme = 'temple';
+      game.state.currentTheme = 'column';
       game.state.start('Boot');
     })();
   </script>

@@ -55,7 +55,7 @@ GameTitle.prototype = {
     const ctaText = game.add.text(
       game.world.centerX,
       game.world.centerY + 250,
-      'Press space to start.'
+      'Press space to start'
     );
     ctaText.anchor.setTo(0.5);
     ctaText.font = 'Staatliches';

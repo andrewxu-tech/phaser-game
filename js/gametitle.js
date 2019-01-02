@@ -22,6 +22,25 @@ GameTitle.prototype = {
 
     this.gameTitleUi = this.game.add.sprite(0, 0, gameTitleUi);
 
+    for (let i = 0; i < 4; i++) {
+      this[`screw-${i}`] = this.game.add.sprite(
+        this.game.world.width / 2,
+        this.game.world.height / 2,
+        'claw-screw'
+      );
+      this[`screw-${i}`].anchor.x = 0.5;
+      this[`screw-${i}`].anchor.y = 0.5;
+    }
+
+    this['screw-0'].position.x = this.game.world.width / 2 + 800;
+    this['screw-0'].position.y = this.game.world.height / 2 + 800;
+    this['screw-1'].position.x = this.game.world.width / 2 + 800;
+    this['screw-1'].position.y = this.game.world.height / 2 - 800;
+    this['screw-2'].position.x = this.game.world.width / 2 - 800;
+    this['screw-2'].position.y = this.game.world.height / 2 + 800;
+    this['screw-3'].position.x = this.game.world.width / 2 - 800;
+    this['screw-3'].position.y = this.game.world.height / 2 - 800;
+
     game.stage.backgroundColor = colors.darkBackground;
     const titleText = game.add.text(
       game.world.centerX,

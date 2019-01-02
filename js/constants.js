@@ -44,3 +44,12 @@ const spriteLists = { // eslint-disable-line
 };
 
 const dropLineHeight = 1500; // eslint-disable-line
+
+const colors = { // eslint-disable-line
+  darkBackground: '#555555'
+};
+
+const typography = { // eslint-disable-line
+  h1: 500,
+  h3: 200
+};

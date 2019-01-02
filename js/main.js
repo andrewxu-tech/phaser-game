@@ -1,4 +1,4 @@
-/* global game spriteLists Phaser dropLineHeight */
+/* global game spriteLists Phaser dropLineHeight colors */
 var Main = function(game) {
 
 };
@@ -40,13 +40,10 @@ Main.prototype = {
 
     if (leftKey.isDown
     && this['claw-left'].body.velocity.x === 0) {
-      console.log('moving left');
       clawComponents.forEach(c => this[c].body.velocity.x = -1000);
     } else if (rightKey.isDown
     && this['claw-right'].body.velocity.x === 0) {
-      console.log('moving right');
       clawComponents.forEach(c => this[c].body.velocity.x = 1000);
-      console.log('LOGGING AFTER FOREACH', this['claw-right'].body.velocity.x);
     }
 
     if ((this['claw-left'].position.x <=
@@ -108,7 +105,7 @@ Main.prototype = {
     worldUi.ctx.moveTo(0, 130);
     worldUi.ctx.lineTo(this.game.world.width, 130);
     worldUi.ctx.lineWidth = 30;
-    worldUi.ctx.strokeStyle = '#555555';
+    worldUi.ctx.strokeStyle = colors.darkBackground;
     worldUi.ctx.stroke();
 
     // Make the left menu rectangle
@@ -122,7 +119,7 @@ Main.prototype = {
     worldUi.ctx.beginPath();
     worldUi.ctx.rect(
       0, 0, 735, 735);
-    worldUi.ctx.fillStyle = '#555555';
+    worldUi.ctx.fillStyle = colors.darkBackground;
     worldUi.ctx.fill();
 
     this.worldUi = this.game.add.sprite(0, 0, worldUi);

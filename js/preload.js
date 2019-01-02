@@ -1,3 +1,4 @@
+/* global WebFont */
 const Preload = function(game) {};
 
 Preload.prototype = {
@@ -12,8 +13,17 @@ Preload.prototype = {
     this.game.load.physics('building_physics', 'assets/themes/building/building_physics.json');
     this.game.load.physics('column_physics', 'assets/themes/column/column_physics.json');
     this.game.load.physics('temple_physics', 'assets/themes/temple/temple_physics.json');
+
+    WebFont.load({
+      active: function() {
+        game.state.start('GameTitle');
+      },
+      google: {
+        families: ['Staatliches']
+      }
+    });
   },
   create: function() {
-    this.game.state.start('Main');
+    this.game.state.start('GameTitle');
   }
 };

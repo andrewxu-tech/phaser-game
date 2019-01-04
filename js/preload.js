@@ -15,6 +15,8 @@ Preload.prototype = {
     this.game.load.physics('building_physics', 'assets/themes/building/building_physics.json');
     this.game.load.physics('column_physics', 'assets/themes/column/column_physics.json');
     this.game.load.physics('temple_physics', 'assets/themes/temple/temple_physics.json');
+    this.game.load.physics('parthenon_physics', 'assets/themes/parthenon/parthenon_physics.json');
+    this.game.load.physics('columneasy_physics', 'assets/themes/columneasy/columneasy_physics.json');
 
     WebFont.load({
       active: function() {

@@ -40,16 +40,37 @@ const spriteLists = { // eslint-disable-line
     '5',
     '6',
     '7'
+  ],
+  parthenon: [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6'
+  ],
+  columneasy: [
+    'middle',
+    'bottom',
+    'top'
   ]
 };
 
 const dropLineHeight = 1500; // eslint-disable-line
 
 const colors = { // eslint-disable-line
-  darkBackground: '#555555'
+  lightBackground: '#555555',
+  darkBackground: '#333333',
+  trueBlack: '#222222'
 };
 
 const typography = { // eslint-disable-line
   h1: 500,
   h3: 200
+};
+
+const THEMES = { // eslint-disable-line
+  'The Aegean Archipelago': {
+    menuTextColor: '#99ccff'
+  }
 };

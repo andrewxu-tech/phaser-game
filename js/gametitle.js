@@ -17,7 +17,7 @@ GameTitle.prototype = {
       2000,
       2000
     );
-    gameTitleUi.ctx.fillStyle = '#333333';
+    gameTitleUi.ctx.fillStyle = colors.darkBackground;
     gameTitleUi.ctx.fill();
 
     this.gameTitleUi = this.game.add.sprite(0, 0, gameTitleUi);
@@ -41,7 +41,7 @@ GameTitle.prototype = {
     this['screw-3'].position.x = this.game.world.width / 2 - 800;
     this['screw-3'].position.y = this.game.world.height / 2 - 800;
 
-    game.stage.backgroundColor = colors.darkBackground;
+    game.stage.backgroundColor = colors.lightBackground;
     const titleText = game.add.text(
       game.world.centerX,
       game.world.centerY - 250,
@@ -71,6 +71,6 @@ GameTitle.prototype = {
   update: function() {
   },
   startGame: function() {
-    this.game.state.start('Main');
+    this.game.state.start('MainMenu');
   }
 };

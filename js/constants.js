@@ -69,8 +69,26 @@ const typography = { // eslint-disable-line
   h3: 200
 };
 
-const THEMES = { // eslint-disable-line
-  'The Aegean Archipelago': {
-    menuTextColor: '#99ccff'
+const THEMES = [ // eslint-disable-line
+  {
+    name: 'aegean',
+    displayName: 'The Aegean\nArchipelago',
+    colors: {
+      menuText: '#99ccff'
+    }
+  },
+  {
+    name: 'celestial',
+    displayName: 'The Celestial\nEmpire',
+    colors: {
+      menuText: '#ff9999'
+    }
+  },
+  {
+    name: 'cheese',
+    displayName: 'Cheese',
+    colors: {
+      menuText: '#ffcc99'
+    }
   }
-};
+];

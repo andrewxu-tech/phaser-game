@@ -83,12 +83,12 @@ const THEMES = [ // eslint-disable-line
     colors: {
       menuText: '#ff9999'
     }
-  },
-  {
-    name: 'cheese',
-    displayName: 'Cheese',
-    colors: {
-      menuText: '#ffcc99'
-    }
   }
+  // {
+  //   name: 'cheese',
+  //   displayName: 'Cheese',
+  //   colors: {
+  //     menuText: '#ffcc99'
+  //   }
+  // }
 ];

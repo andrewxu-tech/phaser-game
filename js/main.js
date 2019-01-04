@@ -105,7 +105,7 @@ Main.prototype = {
     worldUi.ctx.moveTo(0, 130);
     worldUi.ctx.lineTo(this.game.world.width, 130);
     worldUi.ctx.lineWidth = 30;
-    worldUi.ctx.strokeStyle = colors.darkBackground;
+    worldUi.ctx.strokeStyle = colors.lightBackground;
     worldUi.ctx.stroke();
 
     // Make the left menu rectangle
@@ -119,7 +119,7 @@ Main.prototype = {
     worldUi.ctx.beginPath();
     worldUi.ctx.rect(
       0, 0, 735, 735);
-    worldUi.ctx.fillStyle = colors.darkBackground;
+    worldUi.ctx.fillStyle = colors.lightBackground;
     worldUi.ctx.fill();
 
     this.worldUi = this.game.add.sprite(0, 0, worldUi);

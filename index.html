@@ -24,6 +24,7 @@
     }
   </style>
   <script type="text/javascript">
+    // Initialise the game. Adjust the width according to the window size.
     (function() {
       gameWidth = window.innerWidth * window.devicePixelRatio < 3000
       ? 3000
@@ -45,7 +46,7 @@
       game.state.add("GameOver", GameOver);
 
       //Start the first state
-      game.state.currentTheme = 'columneasy';
+      game.state.currentTheme = 'qingandian';
       game.state.start('Boot');
     })();
   </script>

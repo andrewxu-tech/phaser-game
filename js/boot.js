@@ -1,7 +1,5 @@
-/* global Phaser */
-var Boot = function(game) {
-
-};
+/* global game */
+var Boot = function(game) {};
 
 Boot.prototype = {
   preload: function() {

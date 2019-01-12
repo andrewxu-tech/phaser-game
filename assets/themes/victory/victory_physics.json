@@ -1,0 +1,112 @@
+{ 
+    
+    "1": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   419, 0  ,  420, 95  ,  22, 99  ,  18, 0  ]
+        }
+    ]
+    , 
+    "2": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   298, 61  ,  256, 69  ,  224, 42  ,  316, 0  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   245, 92  ,  224, 101  ,  151, 102  ,  138, 80  ,  167, 38  ,  224, 42  ,  256, 69  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   89, 46  ,  99, 3  ,  121, 0  ,  167, 38  ,  138, 80  ,  96, 72  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   158, 292  ,  235, 330  ,  267, 359  ,  161, 364  ,  138, 306  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   154, 202  ,  224, 101  ,  235, 330  ,  158, 292  ,  139, 265  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   394, 400  ,  6, 400  ,  161, 364  ,  267, 359  ,  394, 364  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   161, 364  ,  6, 400  ,  6, 364  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   151, 102  ,  224, 101  ,  154, 202  ,  143, 148  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   235, 330  ,  224, 101  ,  243, 176  ]
+        }
+    ]
+    , 
+    "3": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   6, 115  ,  276, 95  ,  277, 169  ,  44, 169  ,  7, 157  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   321, 142  ,  306, 163  ,  277, 169  ,  276, 95  ,  309, 108  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   276, 95  ,  6, 115  ,  276, 0  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   9, 398  ,  277, 313  ,  312, 398  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   9, 398  ,  42, 313  ,  277, 169  ,  277, 313  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   277, 169  ,  42, 313  ,  44, 169  ]
+        }
+    ]
+    , 
+    "4": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   300, 200  ,  0, 200  ,  0, 0  ]
+        }
+    ]
+    , 
+    "5": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   300, 200  ,  0, 200  ,  300, 0  ]
+        }
+    ]
+}

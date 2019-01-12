@@ -45,7 +45,7 @@ GameTitle.prototype = {
     const titleText = game.add.text(
       game.world.centerX,
       game.world.centerY - 250,
-      'STACK.'
+      'PLONK.'
     );
     titleText.anchor.setTo(0.5);
     titleText.font = 'Staatliches';

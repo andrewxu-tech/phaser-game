@@ -53,6 +53,30 @@ const spriteLists = { // eslint-disable-line
     'middle',
     'bottom',
     'top'
+  ],
+  victory: [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ],
+  mycenae: [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8'
+  ],
+  qingandian: [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
   ]
 };
 

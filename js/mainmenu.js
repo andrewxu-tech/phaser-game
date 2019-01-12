@@ -73,16 +73,15 @@ MainMenu.prototype = {
       eachTheme[i].fill = THEMES[i].colors.menuText;
     });
 
-    // Draw in the white rectangle that indicates selection
-    const selectionRectangle = this.game.add.bitmapData(
-      this.game.world.width, this.game.world.height
-    );
-
     // Which of the current themes is selected
     let currentThemeNumber = 1;
 
-    // Adding the selection rectangle
+    // Draw in the white rectangle that indicates selection
     const createSelectionRectangle = () => {
+      const selectionRectangle = this.game.add.bitmapData(
+        this.game.world.width, this.game.world.height
+      );
+
       selectionRectangle.ctx.strokeStyle = '#FFFFFF';
       selectionRectangle.ctx.lineWidth = 25;
       selectionRectangle.ctx.strokeRect(
@@ -91,10 +90,10 @@ MainMenu.prototype = {
         1800,
         500
       );
-    };
 
+      this.selectionRectangle = this.game.add.sprite(0, 0, selectionRectangle);
+    };
     createSelectionRectangle();
-    this.selectionRectangle = this.game.add.sprite(0, 0, selectionRectangle);
 
     // Adding the up and down controls for menu selection
     const upKey = this.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -118,6 +117,10 @@ MainMenu.prototype = {
       createSelectionRectangle();
     });
 
-    // this.game.state.start('Main');
+    const enterKey = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+
+    enterKey.onDown.add(() => {
+      this.game.state.start('Main');
+    });
   }
 };
